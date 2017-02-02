@@ -6,13 +6,30 @@ K = mmread('K.mtx');
 C = mmread('C.mtx');
 M = mmread('M.mtx');
 
+n = size(K,1);
 
-damping = 0.01;
-f  = linspace(1,10,5);
-om = 2*pi*f;
-om = (1-damping*1i)*om;
+damping = 0.05;
+f   = linspace(1,10,3);
+om  = 2*pi*f;
+om  = (1-damping*1i)*om;
+tau = opt_tau(damping, real(om(1)), real(om(end)));
+eta = om./(om-tau);
 
-tau = opt_tau(damping, real(om[1]), real(om[end]));
+I = speye(n);
+II = speye(2*n);
+O = zeros(n,n);
+A = [1i*C K;I O];
+B = [M O;O I];
 
-mat = K + 1i*om[1]*C - om[1]^2*M;
-spy(mat); % Have fun...
+spy(A)
+% spy(B)
+
+for i=1:length(f)
+   mat = A*inv(A-tau*B) - eta(i)*II;
+   
+   figure(9)
+   hold on
+   e = eig(full(mat));
+   plot(real(e),imag(e),'x');
+    
+end
