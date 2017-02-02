@@ -8,7 +8,7 @@ M = mmread('M.mtx');
 
 n = size(K,1);
 
-damping = 0.05;
+damping = 0.5;
 f   = linspace(1,10,3);
 om  = 2*pi*f;
 om  = (1-damping*1i)*om;
@@ -31,5 +31,5 @@ for i=1:length(f)
    hold on
    e = eig(full(mat));
    plot(real(e),imag(e),'x');
-    
+   axis equal
 end
