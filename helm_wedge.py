@@ -7,6 +7,8 @@ from nutils import *
 import scipy
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.io import mmwrite
+
 
 @log.title
 def makeplots( domain, geom, Lx, Lz, value, name, title, ndigits=0, index=None, clim=None, lineOn=False):
@@ -86,7 +88,7 @@ def helm_mat(c, ndims, nx, ny, nz, p_basis, domain, geom):
   return K, C, M, rhs
 
 def main( ndims=2, degree=1, dx = 10.0, dy = 10.0, dz = 10.0, 
-          freq=[16.0,32.0], plots=True):
+          freq=[16.0,32.0], storing=False, plots=True):
       
   # domain size
   Lx = 600.0
@@ -134,6 +136,11 @@ def main( ndims=2, degree=1, dx = 10.0, dy = 10.0, dz = 10.0,
   
   # Create discretization matrices with nutils
   K, C, M, rhs = helm_mat(c, ndims, nx, ny, nz, p_basis, domain, geom)
+
+  if storing:
+      mmwrite('matlab_io/K.mtx', K.toscipy())
+      mmwrite('matlab_io/C.mtx', C.toscipy())
+      mmwrite('matlab_io/M.mtx', M.toscipy())
 
      
   #Solve in python
