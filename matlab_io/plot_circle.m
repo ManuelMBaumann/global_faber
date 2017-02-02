@@ -1,6 +1,5 @@
 function [center,radius] = plot_circle(tau,eta,fignr,color)
 
-
 NOP = 1000;
 
 center(1) = real((0 - conj(tau))/(tau -conj(tau)) - eta);

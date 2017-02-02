@@ -24,12 +24,15 @@ B = [M O;O I];
 spy(A)
 % spy(B)
 
+color=['r','b','g'];
+
+
 for i=1:length(f)
-   mat = A*inv(A-tau*B) - eta(i)*II;
-   
+   mat = A*inv(A-tau*B) - eta(i)*II;  
    figure(9)
    hold on
    e = eig(full(mat));
-   plot(real(e),imag(e),'x');
+   plot(real(e),imag(e),strcat('x',color(i)));
+   plot_circle(tau,eta(i),9,color(i));
    axis equal
 end
