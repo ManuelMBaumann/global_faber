@@ -69,7 +69,7 @@ def helm_mat(c, ndims, nx, ny, nz, p_basis, domain, geom):
   # define Helmholtz eqn.
   laplace    = function.outer( p_basis.grad(geom), p_basis.grad(geom)  ).sum(-1)
   mass       = function.outer( p_basis, p_basis ) / c**2
-  sommerfeld = function.outer( p_basis, p_basis ) / -c 
+  sommerfeld = function.outer( p_basis, p_basis ) / c
     
   # Build matrices
   if ndims == 2:
