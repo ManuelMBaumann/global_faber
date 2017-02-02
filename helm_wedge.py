@@ -141,7 +141,7 @@ def main( ndims=2, degree=1, dx = 10.0, dy = 10.0, dz = 10.0,
       mmwrite('matlab_io/K.mtx', K.toscipy())
       mmwrite('matlab_io/C.mtx', C.toscipy())
       mmwrite('matlab_io/M.mtx', M.toscipy())
-
+      np.savetxt('matlab_io/b.txt', rhs)
      
   #Solve in python
   print('Use python solver')
