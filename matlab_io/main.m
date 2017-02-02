@@ -18,7 +18,7 @@ eta = om./(om-tau);
 I = speye(n);
 II = speye(2*n);
 O = zeros(n,n);
-A = [1i*C K;I O];
+A = [-1i*C K;I O];
 B = [M O;O I];
 
 spy(A)
@@ -26,7 +26,7 @@ spy(A)
 
 for i=1:length(f)
    mat = A*inv(A-tau*B) - eta(i)*II;
-   
+%    mat = A*inv(B);
    figure(9)
    hold on
    e = eig(full(mat));
